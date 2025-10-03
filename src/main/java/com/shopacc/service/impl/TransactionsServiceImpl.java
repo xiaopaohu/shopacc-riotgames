@@ -5,6 +5,8 @@ import com.shopacc.repository.TransactionsRepository;
 import com.shopacc.service.TransactionsService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,13 +35,18 @@ public class TransactionsServiceImpl implements TransactionsService {
     }
 
     @Override
-    public List<Transactions> findByCustomer(Integer customerId) {
-        return transactionsRepository.findByCustomerId(customerId);
+    public List<Transactions> findByCustomerId(Integer customerId) {
+        return transactionsRepository.findByCustomerCustomerId(customerId);
     }
 
     @Override
-    public List<Transactions> findByCustomerAndAmountGreater(Integer customerId, Double amount) {
-        return transactionsRepository.findByCustomerIdAndAmountGreaterThan(customerId, amount);
+    public List<Transactions> findByAmountAbove(BigDecimal min) {
+        return transactionsRepository.findByAmountGreaterThanEqual(min);
+    }
+
+    @Override
+    public List<Transactions> findByTransactionDateRange(Date start, Date end) {
+        return transactionsRepository.findByTransactionDateBetween(start, end);
     }
 
     @Override

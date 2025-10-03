@@ -5,6 +5,7 @@ import com.shopacc.repository.AccountsRepository;
 import com.shopacc.service.AccountsService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,12 @@ public class AccountsServiceImpl implements AccountsService {
     }
 
     @Override
-    public List<Accounts> findByPriceRange(Double min, Double max) {
+    public List<Accounts> findByRank(String rank) {
+        return accountsRepository.findByRank(rank);
+    }
+
+    @Override
+    public List<Accounts> findByPriceRange(BigDecimal min, BigDecimal max) {
         return accountsRepository.findByPriceBetween(min, max);
     }
 

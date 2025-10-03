@@ -5,6 +5,7 @@ import com.shopacc.repository.CustomersRepository;
 import com.shopacc.service.CustomersService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,18 +29,23 @@ public class CustomersServiceImpl implements CustomersService {
     }
 
     @Override
-    public List<Customers> findAll() {
-        return customersRepository.findAll();
-    }
-
-    @Override
     public Optional<Customers> findByEmail(String email) {
         return customersRepository.findByEmail(email);
     }
 
     @Override
-    public List<Customers> searchByName(String keyword) {
+    public List<Customers> findByFullNameLike(String keyword) {
         return customersRepository.findByFullNameContainingIgnoreCase(keyword);
+    }
+
+    @Override
+    public List<Customers> findByBalanceAbove(BigDecimal amount) {
+        return customersRepository.findByBalanceGreaterThanEqual(amount);
+    }
+
+    @Override
+    public List<Customers> findAll() {
+        return customersRepository.findAll();
     }
 
     @Override

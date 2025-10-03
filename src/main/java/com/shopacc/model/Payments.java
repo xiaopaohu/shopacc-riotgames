@@ -1,7 +1,8 @@
 package com.shopacc.model;
 
-import lombok.Data;
 import jakarta.persistence.*;
+import lombok.Data;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -13,10 +14,13 @@ public class Payments {
     @Column(name = "payment_id")
     private Integer paymentId;
 
-    @Column(name = "order_id")
-    private Integer orderId; // FK tới ORDERS
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Orders order;
+
+    @Column(name = "amount")
+    private BigDecimal amount;
 
     @Column(name = "payment_date")
     private LocalDateTime paymentDate;
 }
-

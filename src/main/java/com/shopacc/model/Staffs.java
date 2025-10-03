@@ -3,15 +3,17 @@ package com.shopacc.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
-@Table(name = "CUSTOMERS")
-public class Customers {
+@Table(name = "STAFFS")
+public class Staffs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
-    private Integer customerId;
+    @Column(name = "staff_id")
+    private Integer staffId;
 
     @Column(name = "full_name", nullable = false)
     private String fullName;
@@ -22,6 +24,9 @@ public class Customers {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "balance")
-    private BigDecimal balance;
+    @Column(name = "role", nullable = false)
+    private String role;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 }

@@ -5,6 +5,7 @@ import com.shopacc.repository.OrdersRepository;
 import com.shopacc.service.OrdersService;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,13 +34,23 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public List<Orders> findByCustomer(Integer customerId) {
-        return ordersRepository.findByCustomerId(customerId);
+    public List<Orders> findByStatus(String status) {
+        return ordersRepository.findByStatus(status);
     }
 
     @Override
-    public List<Orders> findByStatus(String status) {
-        return ordersRepository.findByStatus(status);
+    public List<Orders> findByCustomerId(Integer customerId) {
+        return ordersRepository.findByCustomerCustomerId(customerId);
+    }
+
+    @Override
+    public List<Orders> findByStaffId(Integer staffId) {
+        return ordersRepository.findByStaffStaffId(staffId);
+    }
+
+    @Override
+    public List<Orders> findByOrderDateRange(Date start, Date end) {
+        return ordersRepository.findByOrderDateBetween(start, end);
     }
 
     @Override

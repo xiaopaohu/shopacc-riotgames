@@ -1,7 +1,7 @@
 package com.shopacc.model;
 
-import lombok.Data;
 import jakarta.persistence.*;
+import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -40,6 +40,8 @@ public class Accounts {
 
     @Column(name = "listed_at")
     private LocalDateTime listedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id", nullable = false)
+    private Staffs staff;
 }
-
-

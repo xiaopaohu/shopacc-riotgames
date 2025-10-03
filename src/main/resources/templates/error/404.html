@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>404 - Not Found</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>404</h1>
+    <h2>Không tìm thấy trang hoặc dữ liệu</h2>
+    <p th:text="${errorMessage}">Dữ liệu bạn tìm không tồn tại.</p>
+    <a th:href="@{/}" class="btn">Quay về Trang chủ</a>
+</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 package com.shopacc.model;
 
-import lombok.Data;
 import jakarta.persistence.*;
+import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -14,8 +14,9 @@ public class Transactions {
     @Column(name = "transaction_id")
     private Integer transactionId;
 
-    @Column(name = "customer_id")
-    private Integer customerId;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customers customer;
 
     @Column(name = "amount")
     private BigDecimal amount;
