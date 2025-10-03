@@ -1,0 +1,28 @@
+<header xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Trang chủ</a></li>
+
+            <!-- Customer menu -->
+            <li sec:authorize="hasRole('CUSTOMER')"><a th:href="@{/wallet}">Nạp tiền</a></li>
+            <li sec:authorize="hasRole('CUSTOMER')"><a th:href="@{/profile}">Thông tin cá nhân</a></li>
+
+            <!-- Employee menu -->
+            <li sec:authorize="hasRole('EMPLOYEE')"><a th:href="@{/transactions}">Lịch sử giao dịch</a></li>
+
+            <!-- Admin menu -->
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/dashboard}">Dashboard</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin/manage-accounts}">Quản lý Account</a></li>
+
+            <!-- Dùng chung -->
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">Đăng xuất</button>
+                </form>
+            </li>
+
+            <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Đăng nhập</a></li>
+        </ul>
+    </nav>
+</header>

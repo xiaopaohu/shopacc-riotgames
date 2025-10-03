@@ -32,6 +32,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("com.microsoft.sqlserver:mssql-jdbc:12.10.0.jre11")
+    implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.0")
+
+    //phân quyền bằng Spring security cho khỏe
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
+
 
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")

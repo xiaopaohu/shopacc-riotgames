@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Lỗi hệ thống</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
-<div class="container">
-    <h1>Đã xảy ra lỗi</h1>
-    <p th:text="${errorMessage}">Đã có lỗi xảy ra, vui lòng thử lại sau!</p>
-    <a th:href="@{/}" class="btn">Về Trang chủ</a>
-</div>
+<h1>Đã có lỗi xảy ra!</h1>
+<p>Vui lòng quay lại sau hoặc liên hệ quản trị viên.</p>
+<a href="/static" >Quay về trang chủ</a>
 </body>
 </html>
