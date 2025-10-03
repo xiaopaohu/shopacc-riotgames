@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: shopacc-riotgames
+
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=ShopAccRiotGames;encrypt=false;trustServerCertificate=true
+    username: sa
+    password: 123456
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 5
+      auto-commit: true
+
+  servlet:
+    multipart:
+      max-file-size: 10MB       # Giới hạn upload 1 file
+      max-request-size: 10MB    # Giới hạn tổng request upload
+
+  web:
+    resources:
+      cache:
+        cachecontrol:
+          no-store: true
+          max-age: 0
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.shopaccriotgames.model
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
