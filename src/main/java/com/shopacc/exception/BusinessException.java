@@ -1,0 +1,4 @@
+package com.shopacc.exception;
+
+public class BusinessException {
+}
