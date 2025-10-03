@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<body>
+<div layout:fragment="content" class="col-md-6 mx-auto">
+    <h3>Thông tin cá nhân</h3>
+    <dl class="row">
+        <dt class="col-sm-4">Họ tên</dt><dd class="col-sm-8" th:text="${customer.fullName}">Nguyen Van A</dd>
+        <dt class="col-sm-4">Email</dt><dd class="col-sm-8" th:text="${customer.email}">a@example.com</dd>
+        <dt class="col-sm-4">Số dư</dt><dd class="col-sm-8" th:text="${customer.balance}">2000000</dd>
+    </dl>
+</div>
+</body>
+</html>

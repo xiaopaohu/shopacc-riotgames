@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<body>
+<div layout:fragment="content">
+    <h3>Dashboard thống kê</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3"><div class="card-body">
+                <h5 class="card-title">Khách hàng</h5>
+                <p class="card-text fs-3" th:text="${stats.customerCount}">123</p>
+            </div></div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3"><div class="card-body">
+                <h5 class="card-title">Doanh thu</h5>
+                <p class="card-text fs-3" th:text="${stats.revenue}">50000000</p>
+            </div></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

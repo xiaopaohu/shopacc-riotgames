@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<body>
+<div layout:fragment="content" class="row justify-content-center">
+    <div class="col-md-6">
+        <h3 class="mb-4">Đăng ký tài khoản</h3>
+        <form th:action="@{/register}" method="post">
+            <div class="mb-3">
+                <label class="form-label">Họ tên</label>
+                <input type="text" name="fullName" class="form-control" required/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" required/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Mật khẩu</label>
+                <input type="password" name="password" class="form-control" required/>
+            </div>
+            <button class="btn btn-success" type="submit">Đăng ký</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
