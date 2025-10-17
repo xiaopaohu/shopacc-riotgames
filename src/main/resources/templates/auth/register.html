@@ -1,27 +1,124 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/base}">
-<body>
-<div layout:fragment="content" class="row justify-content-center">
-    <div class="col-md-6">
-        <h3 class="mb-4">Đăng ký tài khoản</h3>
-        <form th:action="@{/register}" method="post">
-            <div class="mb-3">
-                <label class="form-label">Họ tên</label>
-                <input type="text" name="fullName" class="form-control" required/>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <h3 class="text-center mb-4">📝 Đăng ký tài khoản</h3>
+
+                    <div id="alertBox" class="alert d-none" role="alert"></div>
+
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Họ và tên *</label>
+                            <input type="text" class="form-control" id="fullName" name="fullName"
+                                   placeholder="Nguyễn Văn A" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                   placeholder="example@email.com" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu *</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                   minlength="6" placeholder="Tối thiểu 6 ký tự" required>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">Số điện thoại *</label>
+                            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber"
+                                   pattern="0[0-9]{9}" placeholder="0123456789" required>
+                            <small class="form-text text-muted">10 số, bắt đầu bằng 0</small>
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg" id="registerBtn">
+                                <span class="spinner-border spinner-border-sm d-none" id="spinner"></span>
+                                Đăng ký
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p>Đã có tài khoản? <a href="/login">Đăng nhập</a></p>
+                        <p><a href="/">← Về trang chủ</a></p>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" required/>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Mật khẩu</label>
-                <input type="password" name="password" class="form-control" required/>
-            </div>
-            <button class="btn btn-success" type="submit">Đăng ký</button>
-        </form>
+        </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const registerBtn = document.getElementById('registerBtn');
+        const spinner = document.getElementById('spinner');
+        const alertBox = document.getElementById('alertBox');
+
+        // Reset
+        document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+        alertBox.classList.add('d-none');
+
+        registerBtn.disabled = true;
+        spinner.classList.remove('d-none');
+
+        const formData = {
+            fullName: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            phoneNumber: document.getElementById('phoneNumber').value
+            // ✅ BỎ address
+        };
+
+        try {
+            const response = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                alertBox.className = 'alert alert-success';
+                alertBox.textContent = '✓ Đăng ký thành công! Đang chuyển đến trang đăng nhập...';
+                alertBox.classList.remove('d-none');
+
+                setTimeout(() => {
+                    window.location.href = '/login';
+                }, 2000);
+            } else {
+                throw new Error(result.message || 'Đăng ký thất bại');
+            }
+        } catch (error) {
+            alertBox.className = 'alert alert-danger';
+            alertBox.textContent = '✗ ' + error.message;
+            alertBox.classList.remove('d-none');
+        } finally {
+            registerBtn.disabled = false;
+            spinner.classList.add('d-none');
+        }
+    });
+</script>
 </body>
 </html>

@@ -3,4 +3,4 @@ pluginManagement {
         kotlin("jvm") version "2.2.0"
     }
 }
-rootProject.name = "shopacc-riotgames"
+rootProject.name = "shop-acc"

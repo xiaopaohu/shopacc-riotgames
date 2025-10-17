@@ -1,6 +1,6 @@
 spring:
   application:
-    name: shopacc-riotgames
+    name: shop-acc
 
   datasource:
     url: jdbc:sqlserver://localhost:1433;databaseName=ShopAcc;encrypt=false;trustServerCertificate=true
@@ -14,8 +14,15 @@ spring:
 
   servlet:
     multipart:
-      max-file-size: 10MB       # Giới hạn upload 1 file
-      max-request-size: 10MB    # Giới hạn tổng request upload
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
 
   web:
     resources:
@@ -26,13 +33,19 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
     show-sql: true
     properties:
       hibernate:
+        format_sql: true
+        use_sql_comments: true
         dialect: org.hibernate.dialect.SQLServerDialect
+        jdbc:
+          time_zone: Asia/Ho_Chi_Minh
+    open-in-view: false
 
 mybatis:
   mapper-locations: classpath:mappers/*.xml
@@ -42,3 +55,33 @@ mybatis:
     cache-enabled: true
     lazy-loading-enabled: true
     aggressive-lazy-loading: false
+
+# Server Configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  error:
+    include-message: always
+    include-binding-errors: always
+
+# ✅ THÊM JWT CONFIGURATION
+jwt:
+  secret: ShopAccSuperSecretKeyForJWTTokenGenerationMustBeLongEnoughAtLeast256BitsForHS256Algorithm
+  expiration: 86400000      # 24 hours (in milliseconds)
+  refresh-expiration: 604800000  # 7 days (in milliseconds)
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.shopacc: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

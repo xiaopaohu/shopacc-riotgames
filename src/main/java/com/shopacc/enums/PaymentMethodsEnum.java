@@ -1,8 +1,5 @@
 package com.shopacc.enums;
 
-public enum PaymentMethod {
-    BANK_TRANSFER,
-    MOMO,
-    CREDIT_CARD,
-    CASH_WALLET
+public enum PaymentMethodsEnum {
+    BANK_TRANSFER, MOMO, ZALOPAY, CREDIT_CARD, ADMIN_ADJUST
 }

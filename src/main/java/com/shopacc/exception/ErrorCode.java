@@ -1,4 +1,9 @@
 package com.shopacc.exception;
 
-public class ErrorCode {
+public enum ErrorCode {
+    NULL_POINTER,
+    NOT_FOUND,
+    INSUFFICIENT_BALANCE,
+    UNAUTHORIZED,
+    UNKNOWN
 }
