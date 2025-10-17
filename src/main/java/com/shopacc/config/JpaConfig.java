@@ -1,4 +1,4 @@
 package com.shopacc.config;
 
-public class SecurityConfig {
+public class JpaConfig {
 }
